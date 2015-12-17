@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 
 #import <objc/NSObjCRuntime.h>
 
