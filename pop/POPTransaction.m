@@ -14,6 +14,7 @@
 #import "POPGroupAnimationInternal.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import <pthread.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -47,7 +48,7 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
 @end
 
 @interface POPTransactionManager () {
-    OSSpinLock  _lock;
+    pthread_mutex_t _lock;
     NSMapTable* _threadTransactionFILOMap;
     NSMutableArray* _commitedTransactions;
 }
@@ -69,10 +70,15 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
 - (instancetype)init
 {
     self = [super init];
-    _lock = OS_SPINLOCK_INIT;
+    pthread_mutex_init(&_lock, NULL);
     _threadTransactionFILOMap = [NSMapTable weakToStrongObjectsMapTable];
     _commitedTransactions = [NSMutableArray array];
     return self;
+}
+
+- (void)dealloc
+{
+    pthread_mutex_destroy(&_lock);
 }
 
 - (BOOL)canAddAnimationForObject:(id)obj
@@ -92,12 +98,12 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
 
 - (void)lock
 {
-    OSSpinLockLock(&_lock);
+    pthread_mutex_lock(&_lock);
 }
 
 - (void)unlock
 {
-    OSSpinLockUnlock(&_lock);
+    pthread_mutex_unlock(&_lock);
 }
 
 - (POPTransaction*)currentTransaction
