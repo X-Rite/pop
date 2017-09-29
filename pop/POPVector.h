@@ -18,7 +18,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <GLKit/GLKit.h>
 
-#import "POPDefines.h"
+#import <pop/POPDefines.h>
 
 #if SCENEKIT_SDK_AVAILABLE
 #import <SceneKit/SceneKit.h>
@@ -28,7 +28,7 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "POPMath.h"
+#import <pop/POPMath.h>
 
 namespace POP {
 
