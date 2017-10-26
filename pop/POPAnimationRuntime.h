@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <pop/POPVector.h>
+#import "POPVector.h"
 
 enum POPValueType
 {

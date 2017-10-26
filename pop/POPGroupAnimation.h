@@ -6,7 +6,7 @@
 //  Copyright © 2015 Facebook. All rights reserved.
 //
 
-#import <pop/POPAnimation.h>
+#import "POPAnimation.h"
 
 @class POPAnimation;
 

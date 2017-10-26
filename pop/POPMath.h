@@ -11,8 +11,8 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 
-#import <pop/POPDefines.h>
-#import <pop/POPVector.h>
+#import "POPDefines.h"
+#import "POPVector.h"
 
 NS_INLINE CGFloat sqrtr(CGFloat f)
 {
